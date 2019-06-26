@@ -71,9 +71,9 @@ class pointAnnotator:
         self.labels = self.labels[:-1]
         self.im.figure.canvas.draw()
     
-    def loadPoints(self, points):
-        self.xs = list(points[:, 0])
-        self.ys = list(points[:, 1])
+    def loadPoints(self, points_or_path):
+        self.xs = list(points_or_path[:, 0])
+        self.ys = list(points_or_path[:, 1])         
         self.drawPoints()
         
     def drawPoints(self):
@@ -83,6 +83,10 @@ class pointAnnotator:
             lab = self.ax.text(x,y,str(i+1))
             self.labels.append(lab)
             self.im.figure.canvas.draw()
+            
+    @property
+    def points(self):
+        return np.stack((self.xs, self.ys)).astype(np.float32).T
             
 class pointCopier(pointAnnotator):
     def __init__(self, im, ax):
