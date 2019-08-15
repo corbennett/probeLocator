@@ -4,9 +4,9 @@ import os
 import logging
 
 
-directory_list = []
+directory_list = [r'Z:']
                   
-desired_image_filenames_contain = ['surface-image3']
+desired_image_filenames_contain = ['surface-image1', 'surface-image3']
 
 
 npz_filename = 'ISIregistration.npz'
