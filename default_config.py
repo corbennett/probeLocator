@@ -20,8 +20,8 @@ def get_insertion_image_paths(mouse_number):
             sessions = os.listdir(directory)
         except Exception as E:
             log_str = 'Failed to find sessions at {}'.format(directory)
-            logging.warning(log_str)
-            sessionts = []
+            logging.error(log_str)
+            sessions = []
         for session_dir in sessions:
             if mouse_number in session_dir:
                 session_path = os.path.join(directory, session_dir)
