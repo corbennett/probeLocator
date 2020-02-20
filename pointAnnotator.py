@@ -139,7 +139,8 @@ def points_from_path(path, *args):
             npz_count += 1
             match_count = 0
             npz_file = np.load(os.path.join(path, filename))
-            for array_name in npz_file.files:
+            stored_points = npz_file['imagePairCoordinates'][0]
+            for array_name in stored_points:
                 match = True
                 for arg in args:
                     if not(arg in array_name):
