@@ -4,16 +4,16 @@ import os
 import logging
 
 
-directory_list = [r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6']
+directory_list = [r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
                   
-desired_image_filenames_contain = ['surface-image1', 'surface-image3']
+desired_image_filenames_contain = ['surface-image3']#, 'surface-image1']
 
 
 npz_file_suffix = 'ISIregistration.npz'
 
 
 
-def get_insertion_image_paths(mouse_number):
+def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desired_image_filenames_contain):
     path_list = []
     for directory in directory_list:
         try:

@@ -138,18 +138,21 @@ def points_from_path(path, *args):
         if os.path.splitext(filename)[1]=='.npz':
             npz_count += 1
             match_count = 0
-            npz_file = np.load(os.path.join(path, filename))
-            stored_points = npz_file['imagePairCoordinates'][0]
-            for array_name in stored_points:
-                match = True
-                for arg in args:
-                    if not(arg in array_name):
-                        match = False
-                if match:
-                    match_count += 1
-                    logging.info('Found some points')
-                    points = npz_file[array_name]
-                    logging.info(points)
+            try:
+                npz_file = np.load(os.path.join(path, filename), allow_pickle=True)
+                stored_points = npz_file['imagePairCoordinates'][0]
+                for array_name in stored_points:
+                    match = True
+                    for arg in args:
+                        if not(arg in array_name):
+                            match = False
+                    if match:
+                        match_count += 1
+                        logging.info('Found some points')
+                        points = npz_file[array_name]
+                        logging.info(points)
+            except Exception as E:
+                return points
             if match_count>1:
                 logging.warning(log_str.format('array', filename))
     if npz_count>1:
