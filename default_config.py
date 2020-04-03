@@ -6,7 +6,7 @@ import logging
 
 directory_list = [r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
                   
-desired_image_filenames_contain = ['surface-image3']#, 'surface-image1']
+desired_image_filenames_contain = ['surface-image1']#, 'surface-image1']
 
 
 npz_file_suffix = 'ISIregistration.npz'
