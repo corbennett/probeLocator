@@ -4,7 +4,7 @@ import os
 import logging
 
 
-directory_list = [r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+directory_list = [r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'Z:'],# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
                   
 desired_image_filenames_contain = ['surface-image1']#, 'surface-image1']
 
