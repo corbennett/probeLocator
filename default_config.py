@@ -4,7 +4,9 @@ import os
 import logging
 
 
-directory_list = [r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'Z:'],# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+directory_list = [ r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+
+#
                   
 desired_image_filenames_contain = ['surface-image1']#, 'surface-image1']
 
@@ -16,8 +18,10 @@ npz_file_suffix = 'ISIregistration.npz'
 def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desired_image_filenames_contain):
     path_list = []
     for directory in directory_list:
+        #print('###################### '+directory)
         try:
             sessions = os.listdir(directory)
+            #print(sessions)
         except Exception as E:
             log_str = 'Failed to find sessions at {}'.format(directory)
             logging.error(log_str)
@@ -32,7 +36,7 @@ def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desi
                             match = True
                     if (mouse_number in filename) and match:
                         path_list.append(os.path.join(session_path, filename))
-
+    #print(path_list)
     return path_list
 
 
