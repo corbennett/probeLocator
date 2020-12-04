@@ -140,6 +140,7 @@ class pointAnnotator:
         
     def drawPoints(self):
         for i, (x,y) in enumerate(zip(self.xs, self.ys)):
+            time.sleep(.5)
             anno, = self.ax.plot(x,y, self.marker_str)
             self.annos.append(anno)
             lab = self.ax.text(x+6,y-4,str(i+1))
