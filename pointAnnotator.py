@@ -9,7 +9,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import os
 import logging
-
+import time
 #class to handle annotating the images with points of interest
 #USE: left mouse clicks will draw red dots on image and populate a list of x y coordinates for each dot
 #     right mouse clicks will clear the dots and the x y coordinate list
@@ -68,7 +68,7 @@ class pointAnnotator:
             else:
                 if (distance < 10) and not(self.clicked_annotation(self.last_click) is None):
                     self.deleteAnnotation(self.clicked_annotation(self.last_click))
-                if (distance > 10) and self.clicked_annotation(self.last_click)==None and self.clicked_annotation(event)==None:
+                if (distance > 30) and self.clicked_annotation(self.last_click)==None and self.clicked_annotation(event)==None:
                     self.resetAnnotations()
 
     def update_annotation(self, idx, event):
@@ -86,7 +86,7 @@ class pointAnnotator:
     def clicked_annotation(self, event):
         for idx, (x,y) in enumerate(zip(self.xs, self.ys)):
             distance = ((event.xdata-x)**2 + (event.ydata-y)**2)**0.5
-            if distance < 10:
+            if distance < 30:
                 return idx
         return None
 
@@ -118,14 +118,14 @@ class pointAnnotator:
         
         
     def deleteLastAnnotation(self):
-        self.deleteAnnotation(-1)
-        #self.xs = self.xs[:-1]
-        #self.ys = self.ys[:-1]
-        #self.annos[-1].remove()
-        #self.labels[-1].remove()
-        #self.annos = self.annos[:-1]
-        #self.labels = self.labels[:-1]
-        #self.im.figure.canvas.draw()
+        #self.deleteAnnotation(-1)
+        self.xs = self.xs[:-1]
+        self.ys = self.ys[:-1]
+        self.annos[-1].remove()
+        self.labels[-1].remove()
+        self.annos = self.annos[:-1]
+        self.labels = self.labels[:-1]
+        self.im.figure.canvas.draw()
     
     def loadPoints(self, points):
         try:
@@ -140,6 +140,7 @@ class pointAnnotator:
         
     def drawPoints(self):
         for i, (x,y) in enumerate(zip(self.xs, self.ys)):
+            time.sleep(.5)
             anno, = self.ax.plot(x,y, self.marker_str)
             self.annos.append(anno)
             lab = self.ax.text(x+6,y-4,str(i+1))
