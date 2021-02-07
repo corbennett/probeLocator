@@ -4,7 +4,9 @@ import os
 import logging
 
 
-directory_list = [ r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+directory_list = [ r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'10.128.50.20\sd7.2\habituaiton']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+
+save_hab_files = r'\\10.128.50.20\sd7.2\habituation'
 
 #
                   
@@ -41,7 +43,10 @@ def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desi
 
 
 def get_save_path(file_path):
-    saveDirectory = os.path.dirname(file_path)
+    if not('surface-image3' in file_path):
+        saveDirectory = os.path.join(save_hab_files, get_session_name(file_path))
+    else:
+        saveDirectory = os.path.dirname(file_path)
     npz_filename = get_session_name(file_path)+'.'+npz_file_suffix
     save_path = os.path.join(saveDirectory, npz_filename)
     return save_path
