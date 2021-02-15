@@ -43,7 +43,7 @@ def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desi
 
 
 def get_save_path(file_path):
-    if not('surface-image3' in file_path):
+    if False:#not('surface-image3' in file_path):
         saveDirectory = os.path.join(save_hab_files, get_session_name(file_path))
     else:
         saveDirectory = os.path.dirname(file_path)
