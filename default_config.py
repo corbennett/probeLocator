@@ -4,9 +4,9 @@ import os
 import logging
 
 
-directory_list = [ r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'10.128.50.20\sd7.2\habituation', r'10.128.54.20\SD8\habituation']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+directory_list = [ r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'10.128.50.20\sd7.2\habituation', r'10.128.54.19\sd9\habituation']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
 
-save_hab_files = r'\\10.128.54.20\sd8\habituation'
+save_hab_files = r'\\10.128.54.19\sd9\habituation'
 
 #
                   
