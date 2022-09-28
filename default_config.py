@@ -4,7 +4,7 @@ import os
 import logging
 
 
-directory_list = [ r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'10.128.50.20\sd7.2\habituation', r'10.128.54.20\SD8\habituation']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
+directory_list = [r'\\allen\programs\mindscope\workgroups\np-exp', r'\\w10DTSM18306\neuropixels_data', r'\\w10DTSM112719\neuropixels_data', r'10.128.50.20\sd7.2\habituation', r'10.128.54.20\SD8\habituation']# r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', r'\\10.128.50.43\sd6.3', r'\\10.128.50.43\sd6.3\habituation']#r'Z:', r'\\10.128.50.43\sd6.2', r'\\10.128.50.43\sd6', 112719
 
 save_hab_files = r'\\10.128.54.20\sd8\habituation'
 
@@ -17,7 +17,8 @@ npz_file_suffix = 'ISIregistration.npz'
 
 
 
-def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desired_image_filenames_contain):
+def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desired_image_filenames_contain,
+                                directory_list = directory_list):
     path_list = []
     for directory in directory_list:
         #print('###################### '+directory)
@@ -26,7 +27,7 @@ def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desi
             #print(sessions)
         except Exception as E:
             log_str = 'Failed to find sessions at {}'.format(directory)
-            logging.error(log_str)
+            #logging.error(log_str)
             sessions = []
         for session_dir in sessions:
             if mouse_number in session_dir:
@@ -41,6 +42,31 @@ def get_insertion_image_paths(mouse_number, desired_image_filenames_contain=desi
     #print(path_list)
     return path_list
 
+def get_insertion_image_path_from_session_id(session_id, desired_image_filenames_contain=desired_image_filenames_contain,
+                                            directory_list=directory_list):
+    path_list = []
+    for directory in directory_list:
+        #print('###################### '+directory)
+        try:
+            sessions = os.listdir(directory)
+            #print(sessions)
+        except Exception as E:
+            log_str = 'Failed to find sessions at {}'.format(directory)
+            #logging.error(log_str)
+            sessions = []
+        for session_dir in sessions:
+            if session_id in session_dir:
+                session_path = os.path.join(directory, session_dir)
+                for filename in os.listdir(session_path):
+                    match = False
+                    for sub_string in desired_image_filenames_contain:
+                        if sub_string in filename:
+                            match = True
+                    if (session_id in filename) and match:
+                        path_list.append(os.path.join(session_path, filename))
+                        break
+    #print(path_list)
+    return path_list
 
 def get_save_path(file_path):
     if False:#not('surface-image3' in file_path):
